@@ -1,0 +1,96 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props"
+            Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')"/>
+    <Import Project="$(SolutionDir)Environment.props" Condition="Exists('$(SolutionDir)Environment.props')" />
+    <PropertyGroup>
+        <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+        <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+        <ProjectGuid>{542DE3E1-64DA-42F8-AC30-0D02E37BDE1A}</ProjectGuid>
+        <OutputType>Library</OutputType>
+        <AppDesignerFolder>Properties</AppDesignerFolder>
+        <RootNamespace>Shields</RootNamespace>
+        <AssemblyName>Shields</AssemblyName>
+        <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
+        <FileAlignment>512</FileAlignment>
+    </PropertyGroup>
+    <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+        <PlatformTarget>AnyCPU</PlatformTarget>
+        <DebugSymbols>true</DebugSymbols>
+        <DebugType>full</DebugType>
+        <Optimize>false</Optimize>
+        <OutputPath>bin\Debug\</OutputPath>
+        <DefineConstants>DEBUG;TRACE</DefineConstants>
+        <ErrorReport>prompt</ErrorReport>
+        <WarningLevel>4</WarningLevel>
+    </PropertyGroup>
+    <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+        <PlatformTarget>AnyCPU</PlatformTarget>
+        <DebugType>pdbonly</DebugType>
+        <Optimize>true</Optimize>
+        <OutputPath>bin\Release\</OutputPath>
+        <DefineConstants>TRACE</DefineConstants>
+        <ErrorReport>prompt</ErrorReport>
+        <WarningLevel>4</WarningLevel>
+    </PropertyGroup>
+    <ItemGroup>
+        <Reference Include="System"/>
+        <Reference Include="System.Core"/>
+        <Reference Include="System.Data"/>
+        <Reference Include="System.Xml"/>
+    </ItemGroup>
+    <ItemGroup>
+        <Reference Include="Assembly-CSharp">
+            <HintPath>$(BELOW_THE_STONE_INSTALL)/Below The Stone_Data/Managed/Assembly-CSharp.dll</HintPath>
+        </Reference>
+        <Reference Include="Bts-Util">
+            <HintPath>$(BELOW_THE_STONE_INSTALL)/Below The Stone_Data/Managed/Bts-Util.dll</HintPath>
+        </Reference>
+        <Reference Include="BepInEx">
+            <HintPath>$(BELOW_THE_STONE_INSTALL)/BepInEx/core/BepInEx.dll</HintPath>
+        </Reference>
+        <Reference Include="0Harmony">
+            <HintPath>$(BELOW_THE_STONE_INSTALL)/BepInEx/core/0Harmony.dll</HintPath>
+        </Reference>
+        <Reference Include="UnityEngine">
+            <HintPath>$(BELOW_THE_STONE_INSTALL)/Below The Stone_Data/Managed/UnityEngine.dll</HintPath>
+        </Reference>
+        <Reference Include="UnityEngine.CoreModule">
+            <HintPath>$(BELOW_THE_STONE_INSTALL)/Below The Stone_Data/Managed/UnityEngine.CoreModule.dll</HintPath>
+        </Reference>
+        <Reference Include="UnityEngine.JSONSerializeModule">
+            <HintPath>$(BELOW_THE_STONE_INSTALL)/Below The Stone_Data/Managed/UnityEngine.JSONSerializeModule.dll</HintPath>
+        </Reference>
+        <Reference Include="UnityEngine.AssetBundleModule">
+            <HintPath>$(BELOW_THE_STONE_INSTALL)/Below The Stone_Data/Managed/UnityEngine.AssetBundleModule.dll</HintPath>
+        </Reference>
+        <Reference Include="UnityEngine.AnimationModule">
+            <HintPath>$(BELOW_THE_STONE_INSTALL)/Below The Stone_Data/Managed/UnityEngine.AnimationModule.dll</HintPath>
+        </Reference>
+    </ItemGroup>
+    <ItemGroup>
+        <Compile Include="Plugin.cs" />
+        <Compile Include="Properties\AssemblyInfo.cs"/>
+        <Compile Include="ShieldItemType.cs" />
+    </ItemGroup>
+    <ItemGroup>
+      <EmbeddedResource Include="shields" />
+    </ItemGroup>
+    <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets"/>
+    <Target Name="BeforeBuild">
+        <Copy Condition="Exists('$(SolutionDir)ShieldsUnity/AssetBundles/StandaloneWindows/shields')" SourceFiles="$(SolutionDir)ShieldsUnity/AssetBundles/StandaloneWindows/shields" DestinationFolder="$(SolutionDir)$(TargetName)" />
+    </Target>
+    <Target Name="AfterBuild" Condition="Exists('$(MOD_DEPLOYPATH)')">
+        <Copy SourceFiles="$(TargetDir)$(TargetName).dll" DestinationFolder="$(SolutionDir)ShieldsUnity/Assets/Assemblies" />
+        <Copy SourceFiles="$(TargetDir)BepInEx.dll" DestinationFolder="$(SolutionDir)ShieldsUnity/Assets/Assemblies" />
+        <Copy SourceFiles="$(TargetDir)0Harmony.dll" DestinationFolder="$(SolutionDir)ShieldsUnity/Assets/Assemblies" />
+        <Copy SourceFiles="$(TargetDir)Mono.Cecil.dll" DestinationFolder="$(SolutionDir)ShieldsUnity/Assets/Assemblies" />
+        <Copy SourceFiles="$(TargetDir)MonoMod.Utils.dll" DestinationFolder="$(SolutionDir)ShieldsUnity/Assets/Assemblies" />
+        <Copy SourceFiles="$(TargetDir)MonoMod.RuntimeDetour.dll" DestinationFolder="$(SolutionDir)ShieldsUnity/Assets/Assemblies" />
+
+        <Exec Command="$(SolutionDir)Libraries/Debug/pdb2mdb.exe $(TargetPath)" />
+        <MakeDir Directories="$(MOD_DEPLOYPATH)/$(TargetName)" />
+        <Copy SourceFiles="$(TargetDir)$(TargetName).dll" DestinationFolder="$(MOD_DEPLOYPATH)/$(TargetName)" />
+        <Copy SourceFiles="$(TargetDir)$(TargetName).dll.mdb" DestinationFolder="$(MOD_DEPLOYPATH)/$(TargetName)" />
+    </Target>
+</Project>
