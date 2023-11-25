@@ -23,6 +23,7 @@
         <DefineConstants>DEBUG;TRACE</DefineConstants>
         <ErrorReport>prompt</ErrorReport>
         <WarningLevel>4</WarningLevel>
+        <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     </PropertyGroup>
     <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
         <PlatformTarget>AnyCPU</PlatformTarget>
@@ -32,6 +33,7 @@
         <DefineConstants>TRACE</DefineConstants>
         <ErrorReport>prompt</ErrorReport>
         <WarningLevel>4</WarningLevel>
+        <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     </PropertyGroup>
     <ItemGroup>
         <Reference Include="System"/>
@@ -41,7 +43,7 @@
     </ItemGroup>
     <ItemGroup>
         <Reference Include="Assembly-CSharp">
-            <HintPath>$(BELOW_THE_STONE_INSTALL)/Below The Stone_Data/Managed/Assembly-CSharp.dll</HintPath>
+            <HintPath>$(BELOW_THE_STONE_INSTALL)/Below The Stone_Data/Managed/publicized_assemblies/Assembly-CSharp_publicized.dll</HintPath>
         </Reference>
         <Reference Include="Bts-Util">
             <HintPath>$(BELOW_THE_STONE_INSTALL)/Below The Stone_Data/Managed/Bts-Util.dll</HintPath>
@@ -67,8 +69,17 @@
         <Reference Include="UnityEngine.AnimationModule">
             <HintPath>$(BELOW_THE_STONE_INSTALL)/Below The Stone_Data/Managed/UnityEngine.AnimationModule.dll</HintPath>
         </Reference>
+        <Reference Include="Unity.InputSystem">
+            <HintPath>$(BELOW_THE_STONE_INSTALL)/Below The Stone_Data/Managed/Unity.InputSystem.dll</HintPath>
+        </Reference>
+        <Reference Include="UnityEngine.InputLegacyModule">
+            <HintPath>$(BELOW_THE_STONE_INSTALL)/Below The Stone_Data/Managed/UnityEngine.InputLegacyModule.dll</HintPath>
+        </Reference>
     </ItemGroup>
     <ItemGroup>
+        <Compile Include="Mocks.cs" />
+        <Compile Include="ItemPatches.cs" />
+        <Compile Include="PlayerPatches.cs" />
         <Compile Include="Plugin.cs" />
         <Compile Include="Properties\AssemblyInfo.cs"/>
         <Compile Include="ShieldItemType.cs" />

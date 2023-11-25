@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1315945158, guid: 779cf920f64504746b0f6936346cba57, type: 3}
+  m_Name: MS_shield_copper
+  m_EditorClassIdentifier: 
+  category: Item
+  nameID: MS_shield_copper
+  location: armor
+  stackLimit: 1
+  collectionMissionItem: 0
+  displayName: Copper Shield
+  description: 
+  inventorySprite: {fileID: 21300000, guid: f14db0e3abfa3574188fdcf99f332f71, type: 3}
+  itemPrefab: {fileID: 0}
+  itemAnimationController: {fileID: 0}
+  goldCoinValue: 20
+  damageResistence: 0
+  bodyPart: 5
+  clothingSprites: {fileID: 11400000, guid: 5a75b566ac860b64ab080859179eced9, type: 2}
+  clothingSpritesAlt: {fileID: 0}
+  hideHair: 0
+  characterTextures: []
+  blockValue: 4

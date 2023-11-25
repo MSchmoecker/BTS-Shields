@@ -9,18 +9,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 1315945158, guid: 779cf920f64504746b0f6936346cba57, type: 3}
-  m_Name: MS_shield_tin_light
+  m_Script: {fileID: 11500000, guid: 61366788b8bd018439e06eaff7643160, type: 3}
+  m_Name: Mock_copper_ingot
   m_EditorClassIdentifier: 
-  category: Item
-  nameID: MS_shield_tin_light
-  location: shield
+  category: 
+  nameID: 
+  location: 
   stackLimit: 1
   collectionMissionItem: 0
-  displayName: Tin Shield Light
+  displayName: 
   description: 
   inventorySprite: {fileID: 0}
   itemPrefab: {fileID: 0}
   itemAnimationController: {fileID: 0}
-  goldCoinValue: 20
-  blockValue: 2
+  goldCoinValue: 1

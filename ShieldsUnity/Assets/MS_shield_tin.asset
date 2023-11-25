@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1315945158, guid: 779cf920f64504746b0f6936346cba57, type: 3}
+  m_Name: MS_shield_tin
+  m_EditorClassIdentifier: 
+  category: Item
+  nameID: MS_shield_tin
+  location: armor
+  stackLimit: 1
+  collectionMissionItem: 0
+  displayName: Tin Shield
+  description: 
+  inventorySprite: {fileID: 21300000, guid: f5f13fe8d7f26f04a99feb7d83280c8d, type: 3}
+  itemPrefab: {fileID: 0}
+  itemAnimationController: {fileID: 0}
+  goldCoinValue: 20
+  damageResistence: 0
+  bodyPart: 5
+  clothingSprites: {fileID: 11400000, guid: 4c1ab204c5a317f41b8f96b553e20ffc, type: 2}
+  clothingSpritesAlt: {fileID: 0}
+  hideHair: 0
+  characterTextures: []
+  blockValue: 2
