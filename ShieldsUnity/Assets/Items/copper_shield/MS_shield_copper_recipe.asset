@@ -17,8 +17,10 @@ MonoBehaviour:
   location: blacksmith
   hideRecipe: 0
   ingredients:
-  - itemCount: 1
+  - itemCount: 8
     itemType: {fileID: 11400000, guid: 0fb6274ef0ab7b748a528182a84dcb85, type: 2}
+  - itemCount: 2
+    itemType: {fileID: 11400000, guid: b276bb8c7ad6a374490c2026ab783a7a, type: 2}
   recipeOutput:
     outputItem:
       stackSize: 1
