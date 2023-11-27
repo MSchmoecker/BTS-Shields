@@ -34,3 +34,9 @@ This mod requires BepInEx to work, it's a modding framework that allows multiple
    ```
 3. Compile the project. This copies the resulting dll into the `MOD_DEPLOYPATH`, if set
 4. To change assets, open the Unity project and adjust the files. Afterwards, open the Asset Bundle Browser and rebuild the asset bundle. When compiling the project, the asset bundle will be copied into the project folder
+
+
+## Changelog
+
+0.1.0
+- Release
