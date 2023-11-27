@@ -38,6 +38,11 @@ namespace Shields {
             Mocks.FixMocks(copperShield);
             __instance.MasterList.Add(copperShield);
             __instance.MasterList.Add(assetBundle.LoadAsset<CraftingRecipe>("MS_shield_copper_recipe"));
+
+            ShieldItemType ironShield = assetBundle.LoadAsset<ShieldItemType>("MS_shield_iron");
+            Mocks.FixMocks(ironShield);
+            __instance.MasterList.Add(ironShield);
+            __instance.MasterList.Add(assetBundle.LoadAsset<CraftingRecipe>("MS_shield_iron_recipe"));
         }
 
         [HarmonyPatch(typeof(CraftingRecipe), "OnEnable"), HarmonyPrefix]
