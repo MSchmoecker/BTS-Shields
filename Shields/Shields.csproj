@@ -75,6 +75,9 @@
         <Reference Include="UnityEngine.InputLegacyModule">
             <HintPath>$(BELOW_THE_STONE_INSTALL)/Below The Stone_Data/Managed/UnityEngine.InputLegacyModule.dll</HintPath>
         </Reference>
+        <Reference Include="Unity.TextMeshPro">
+            <HintPath>$(BELOW_THE_STONE_INSTALL)/Below The Stone_Data/Managed/Unity.TextMeshPro.dll</HintPath>
+        </Reference>
     </ItemGroup>
     <ItemGroup>
         <Compile Include="Mocks.cs" />

@@ -8,5 +8,7 @@ namespace Shields {
         private int blockValue;
 
         public int BlockValue => blockValue;
+
+        public override string Stats => $"Block: {BlockValue}";
     }
 }
