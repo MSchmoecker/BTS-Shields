@@ -2,7 +2,8 @@
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
     <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props"
             Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')"/>
-    <Import Project="$(SolutionDir)Environment.props" Condition="Exists('$(SolutionDir)Environment.props')" />
+    <Import Project="Environment.props" Condition="Exists('Environment.props')" />
+    <Import Project="../Environment.props" Condition="Exists('../Environment.props')" />
     <PropertyGroup>
         <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
         <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
@@ -91,20 +92,37 @@
       <EmbeddedResource Include="shields" />
     </ItemGroup>
     <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets"/>
+    <PropertyGroup>
+        <TMP_DEPLOY_FOLDER>$(TargetDir)/tmp</TMP_DEPLOY_FOLDER>
+    </PropertyGroup>
     <Target Name="BeforeBuild">
         <Copy Condition="Exists('$(SolutionDir)ShieldsUnity/AssetBundles/StandaloneWindows/shields')" SourceFiles="$(SolutionDir)ShieldsUnity/AssetBundles/StandaloneWindows/shields" DestinationFolder="$(SolutionDir)$(TargetName)" />
     </Target>
-    <Target Name="AfterBuild" Condition="Exists('$(MOD_DEPLOYPATH)')">
+    <Target Name="AfterBuild" >
+        <CallTarget Targets="PrepareUnity" />
+        <CallTarget Targets="CreateZip" />
+        <CallTarget Targets="Deploy" Condition="Exists('$(MOD_DEPLOYPATH)')" />
+    </Target>
+    <Target Name="PrepareUnity">
         <Copy SourceFiles="$(TargetDir)$(TargetName).dll" DestinationFolder="$(SolutionDir)ShieldsUnity/Assets/Assemblies" />
         <Copy SourceFiles="$(TargetDir)BepInEx.dll" DestinationFolder="$(SolutionDir)ShieldsUnity/Assets/Assemblies" />
         <Copy SourceFiles="$(TargetDir)0Harmony.dll" DestinationFolder="$(SolutionDir)ShieldsUnity/Assets/Assemblies" />
         <Copy SourceFiles="$(TargetDir)Mono.Cecil.dll" DestinationFolder="$(SolutionDir)ShieldsUnity/Assets/Assemblies" />
         <Copy SourceFiles="$(TargetDir)MonoMod.Utils.dll" DestinationFolder="$(SolutionDir)ShieldsUnity/Assets/Assemblies" />
         <Copy SourceFiles="$(TargetDir)MonoMod.RuntimeDetour.dll" DestinationFolder="$(SolutionDir)ShieldsUnity/Assets/Assemblies" />
-
-        <Exec Command="$(SolutionDir)Libraries/Debug/pdb2mdb.exe $(TargetPath)" />
+    </Target>
+    <Target Name="CreateZip">
+        <MakeDir Directories="$(TMP_DEPLOY_FOLDER)" />
+        <Copy SourceFiles="$(TargetPath)" DestinationFolder="$(TMP_DEPLOY_FOLDER)" />
+        <Copy SourceFiles="$(SolutionDir)/README.md" DestinationFolder="$(TMP_DEPLOY_FOLDER)" />
+        <Copy SourceFiles="$(SolutionDir)/CHANGELOG.md" DestinationFolder="$(TMP_DEPLOY_FOLDER)" />
+        <Copy SourceFiles="$(SolutionDir)/Package/manifest.json" DestinationFolder="$(TMP_DEPLOY_FOLDER)" />
+        <Copy SourceFiles="$(SolutionDir)/Package/icon.png" DestinationFolder="$(TMP_DEPLOY_FOLDER)" />
+        <ZipDirectory SourceDirectory="$(TMP_DEPLOY_FOLDER)" DestinationFile="$(TMP_DEPLOY_FOLDER)/../$(TargetName).zip" Overwrite="true" />
+    </Target>
+    <Target Name="Deploy" DependsOnTargets="CreateZip">
         <MakeDir Directories="$(MOD_DEPLOYPATH)/$(TargetName)" />
-        <Copy SourceFiles="$(TargetDir)$(TargetName).dll" DestinationFolder="$(MOD_DEPLOYPATH)/$(TargetName)" />
-        <Copy SourceFiles="$(TargetDir)$(TargetName).dll.mdb" DestinationFolder="$(MOD_DEPLOYPATH)/$(TargetName)" />
+        <Unzip SourceFiles="$(TMP_DEPLOY_FOLDER)/../$(TargetName).zip" DestinationFolder="$(MOD_DEPLOYPATH)/$(TargetName)" />
+        <Copy SourceFiles="$(TMP_DEPLOY_FOLDER)/../$(TargetName).zip" DestinationFolder="$(MOD_DEPLOYPATH)/$(TargetName)" />
     </Target>
 </Project>
